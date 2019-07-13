@@ -62,8 +62,11 @@ public class BorderDetection : MonoBehaviour
     }
     private void WrenchDied(GameObject wrench)
     {
+        //Debug.LogWarning("Not Implemented WrenchDied in BorderDetection");
 
-        Debug.LogWarning("Not Implemented WrenchDied in BorderDetection");
-		gameState.PlayerDied();
+        //Test for pool recall. Only test. Don't do this at home, please.
+        PoolManager pm = FindObjectOfType<PoolManager>();
+        pm.RecallBolt(wrench.GetComponent<Bolt>().RecallObject());
+
     }
 }
