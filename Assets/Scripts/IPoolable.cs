@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-interface IPoolable
+public interface IPoolable
 {
     /// <summary>
     /// This method must deactivate the gameObject so it visually disapears from the scene and stops executing any logic, as well as reset 

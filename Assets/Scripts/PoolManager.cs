@@ -4,24 +4,22 @@ using UnityEngine;
 
 public class PoolManager : MonoBehaviour
 {
-    public List<GameObject> boltsPool; //Set in Inspector. It can be directly of type Bolt or Tile.
-    private Bolt[] activeBolts;
+    public List<GameObject> objectsPool; //Set in Inspector. These can be any type implementing IPoolable
+    public GameObject poolable_prefab;
 
-    // Update is called once per frame
+    private Bolt[] activeBolts; //this is only for the Press F test to unscrew all bolts
+
+    /// <summary>
+    /// ONLY FOR TESTING, nothing must happen on update
+    /// </summary>
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            //Place a bolt in the scene around 0,0 randomly
-            if (boltsPool.Count > 0){
-                //Get the first element from the pool
-                Bolt tempBolt = boltsPool[0].GetComponent<Bolt>();
-                Debug.Log(tempBolt);
-                //remove the element from the pool
-                boltsPool.RemoveAt(0);
-                //Reposition the bolt
-                tempBolt.Reposition(new Vector2(Random.Range(-3f, 3f), Random.Range(-3f, 3f)));
-            }
+            IPoolable tempPoolable = GetIPoolable();
+
+            //Reposition the poolable
+            tempPoolable.Reposition(new Vector2(Random.Range(-3f, 3f), Random.Range(-3f, 3f)));
         }
         else if (Input.GetKeyDown(KeyCode.F))
         {
@@ -39,8 +37,31 @@ public class PoolManager : MonoBehaviour
     /// add it again at the end of the pool
     /// </summary>
     /// <param name="fallenBolt"></param>
-    public void RecallBolt(GameObject fallenBolt)
+    public void RecallIPoolable(GameObject fallenBolt)
     {
-        boltsPool.Add(fallenBolt);
+        objectsPool.Add(fallenBolt);
+    }
+
+    /// <summary>
+    /// This method returns the first element of the pool, or if the pool is empty, instantiates a new IPoolable element based on the prefab set in inspector (poolable_prefab).
+    /// </summary>
+    /// <returns></returns>
+    public IPoolable GetIPoolable()
+    {
+        IPoolable tempPoolable = null;
+
+        if (objectsPool.Count > 0)
+        {
+            //Get the first element from the pool
+            tempPoolable = objectsPool[0].GetComponent<IPoolable>();
+            //remove the element from the pool
+            objectsPool.RemoveAt(0);
+        }
+        else
+        {
+            tempPoolable = Instantiate(poolable_prefab).GetComponent<IPoolable>();
+        }
+
+        return tempPoolable;
     }
 }

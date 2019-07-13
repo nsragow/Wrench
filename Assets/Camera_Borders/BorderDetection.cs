@@ -62,11 +62,13 @@ public class BorderDetection : MonoBehaviour
     }
     private void WrenchDied(GameObject wrench)
     {
-        //Debug.LogWarning("Not Implemented WrenchDied in BorderDetection");
+        Debug.LogWarning("Object is out of the camera!");
 
-        //Test for pool recall. Only test. Don't do this at home, please.
+        //Test for pool recall. Only test. DON'T DO THIS!
         PoolManager pm = FindObjectOfType<PoolManager>();
-        pm.RecallBolt(wrench.GetComponent<Bolt>().RecallObject());
+
+        //The thing here is that the Border must tell somehow to a PoolManager that it found an object and it's gonna return it to the pool 
+        pm.RecallIPoolable(wrench.GetComponent<Bolt>().RecallObject());
 
     }
 }
