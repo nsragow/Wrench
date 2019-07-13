@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 /// <summary>
 /// Handles UI and creating InitGameSettigns
@@ -9,15 +10,18 @@ using UnityEngine;
 public class KeySelectHandler : MonoBehaviour
 {
     public GameState gameState;
-    public KeyCode startGame = KeyCode.Mouse0;
-    public KeyCode resetKeys = KeyCode.Mouse1;
-    private Dictionary<KeyCode, string> availableKeys;
+    private KeyCode startGame = KeyCode.Space;
+    private KeyCode resetKeys = KeyCode.Escape;
     private InitGameSettings gameSetting;
-    // Start is called before the first frame update
+
+    [SerializeField] TextMeshProUGUI[] selectionTexts;
+
+    private int currentPlayer;
+
     void Start()
     {
+        currentPlayer = 0;
         gameSetting = new InitGameSettings();
-        InitAvailableKeys();
     }
 
     /// <summary>
@@ -26,35 +30,35 @@ public class KeySelectHandler : MonoBehaviour
     /// </summary>
     void Update()
     {
-        foreach(KeyCode key in availableKeys.Keys)
-        {
-            if (Input.GetKeyDown(key))
-            {
-                gameSetting.playerControls.Add(key);
-                print("added " + key);
-            }
-        }
-        if (Input.GetKeyDown(resetKeys))
-        {
+        if (Input.GetKeyDown(resetKeys)) {
+
+            ResetPlayerKeys();
             gameSetting.playerControls.Clear();
-            print("cleared");
-        }
-        else if (Input.GetKeyDown(startGame) && gameSetting.playerControls.Count > 0)
-        {
+            print("Cleared Set Keys");
+
+        } else if (Input.GetKeyDown(startGame) && gameSetting.playerControls.Count > 0) {
+
             gameState.StartPlaying(gameSetting);
+
+        } else {
+            foreach(KeyCode key in System.Enum.GetValues(typeof(KeyCode))) {
+                if (Input.GetKeyDown(key)) {
+                    SetKey(key);
+                }
+            }
         }
     }
 
+    private void SetKey(KeyCode key) {
+        gameSetting.playerControls.Add(key);
+        selectionTexts[currentPlayer].text = key.ToString();
+        currentPlayer++;
+    }
 
-    private void InitAvailableKeys()
-    {
-        availableKeys = new Dictionary<KeyCode, string>();
-
-
-        availableKeys.Add(KeyCode.A, "A");
-        availableKeys.Add(KeyCode.Space, "Space");
-        availableKeys.Add(KeyCode.Return, "Enter");
-        availableKeys.Add(KeyCode.CapsLock, "CapsLock");
-        availableKeys.Add(KeyCode.RightArrow, "RightArrow");
+    private void ResetPlayerKeys() {
+        foreach(TextMeshProUGUI stext in selectionTexts) {
+            stext.text = "No Key Selected";
+        }
+        currentPlayer = 0;
     }
 }
