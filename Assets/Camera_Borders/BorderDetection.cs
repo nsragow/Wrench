@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BorderDetection : MonoBehaviour
 {
+	public GameState gameState;
     /// <summary>
     /// Any objects placed in here from the editor will be 'Track'ed
     /// </summary>
@@ -61,7 +62,8 @@ public class BorderDetection : MonoBehaviour
     }
     private void WrenchDied(GameObject wrench)
     {
-        Debug.LogWarning("Not Implemented WrenchDied in BorderDetection");
 
+        Debug.LogWarning("Not Implemented WrenchDied in BorderDetection");
+		gameState.PlayerDied();
     }
 }
