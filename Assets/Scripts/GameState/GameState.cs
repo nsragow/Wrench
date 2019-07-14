@@ -20,7 +20,8 @@ public class GameState : MonoBehaviour
     public string keySelectScreenName;
     public string gameOverName;
 
-    
+    [SerializeField] private GameObject optionsPanel;
+    private bool optionsActive = false;
 
     private static int playerCount;
     private static InitGameSettings settings;
@@ -83,9 +84,15 @@ public class GameState : MonoBehaviour
 
     void Start()
     {
+
         if (SceneManager.GetActiveScene().name == splashScreenName) {
             state = State.Start;
-            StartCoroutine(WaitAndLoadScene(1.5f));
+            StartCoroutine(WaitAndLoadScene(4.5f));
+        }
+
+        if (SceneManager.GetActiveScene().name == startScreenName) {
+            optionsPanel.SetActive(false);
+            optionsActive = false;
         }
     }
 
@@ -155,14 +162,41 @@ public class GameState : MonoBehaviour
 
     }
 
-    void Update()
-    {
+    public void QuitGame() {
+        Application.Quit();
+    }
 
-        if (Input.anyKey) {
-            if (state == State.Start) {
-                state = State.KeySelect;
+    public void OpenOptionsPanel() {
+        optionsPanel.SetActive(true);
+        optionsActive = true;
+    }
+
+    public void CloseOptionsPanel() {
+        optionsPanel.SetActive(false);
+        optionsActive = false;
+    }
+
+    public void OpenKeySelect() {
+        state = State.KeySelect;
+        SceneManager.LoadScene(StateToName(state));
+    }
+
+    private void Update() {
+
+
+        if (SceneManager.GetActiveScene().name == splashScreenName) {
+            if (Input.GetKeyDown(KeyCode.Escape)) {
+                state = State.Start;
                 SceneManager.LoadScene(StateToName(state));
             }
         }
+
+        if (SceneManager.GetActiveScene().name == startScreenName) {
+            if (optionsActive && Input.GetKeyDown(KeyCode.Escape)) {
+                optionsPanel.SetActive(false);
+                optionsActive = false;
+            }
+        }
+
     }
 }
