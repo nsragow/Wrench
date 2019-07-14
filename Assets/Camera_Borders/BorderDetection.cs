@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,6 +19,7 @@ public class BorderDetection : MonoBehaviour
     /// <param name="toTrack">untracked GameObject to be tracked</param>
     public void Track(GameObject toTrack)
     {
+        //print("start tracking");
         FellOut newFellOut = toTrack.AddComponent<FellOut>();
         newFellOut.SetBorderDetector(this);
     }
@@ -28,14 +30,29 @@ public class BorderDetection : MonoBehaviour
     /// <param name="trackedObject">tracked gameobject that fell out of view</param>
     public void ImOutOfView(GameObject trackedObject)
     {
+        Destroy(trackedObject.GetComponent<FellOut>());
         switch (GetGameType(trackedObject))
         {
+            
             case "wrench":
                 WrenchDied(trackedObject);
                 break;
+            
+            case "tile":
+                
+                TileOffScreen(trackedObject);
+                break;
+            
             default:
                 throw new System.Exception("Not Implemented");
         }
+        
+    }
+
+    private void TileOffScreen(GameObject tile)
+    {
+        //print("border detect");
+        tile.GetComponent<Returnable>().Return();
         
     }
 
@@ -48,15 +65,15 @@ public class BorderDetection : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 
 
     private string GetGameType(GameObject toCheck)
     {
+        if (toCheck.name.Equals("tile"))
+        {
+            return "tile";
+        }
         //todo, finish this function
         return "wrench";
     }
