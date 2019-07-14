@@ -96,7 +96,7 @@ public class Player : MonoBehaviour
         string fileToPlay = "ClipOut";
         fileToPlay += (string)Random.Range(1, 8);
         fileToPlay += ".wav";
-        audioManager.Play(fileToPlay);
+        audioManager.Play(fileToPlay, false);
     }
 
     void Set_Start()
@@ -121,7 +121,7 @@ public class Player : MonoBehaviour
         string fileToPlay = "ClipIn";
         fileToPlay += (string)Random.Range(1, 6);
         fileToPlay += ".wav";
-        audioManager.Play(fileToPlay);
+        audioManager.Play(fileToPlay, false);
     }
 
 }
