@@ -15,12 +15,12 @@ public class AudioManager : MonoBehaviour {
   [SerializeField]
   private AudioClip[] clips;
   private Dictionary<string, AudioClip> clipDict = new Dictionary<string, AudioClip>();
-  
+
   //This should be an object with an audio source as a component (default settings)
   [SerializeField]
   private GameObject audioPlayer;
   private List<AudioSource> activeAudioPlayers = new List<AudioSource>();
-  
+
   void Awake()
   {
     foreach (AudioClip clip in clips)
@@ -30,7 +30,7 @@ public class AudioManager : MonoBehaviour {
     //set to null so GC will free memory
     clips = null;
   }
-  
+
   void Update()
   {
     foreach(AudioSource source in activeAudioPlayers)
@@ -38,13 +38,13 @@ public class AudioManager : MonoBehaviour {
         Stop(source);
     }
   }
-  
+
   public void Stop(AudioSource source)
   {
     source.Stop();
     Destroy(source.gameObject);
   }
-  
+
   public void Play(string clipName, bool isLooping)
   {
     AudioClip clipToPlay = null;
@@ -57,9 +57,9 @@ public class AudioManager : MonoBehaviour {
     {
       Debug.LogError("Tried to play audio file that is not in the audio manager!");
     }
-    
+
   }
-  
+
   //returns audio source of clip that is playing (you need to keep track of this if you want to premeturely stop the clip!)
   public AudioSource Play(AudioClip clip, bool isLooping)
   {
