@@ -14,12 +14,15 @@ public class KeySelectHandler : MonoBehaviour
     private KeyCode resetKeys = KeyCode.Escape;
     private InitGameSettings gameSetting;
 
+    private List<KeyCode> usedKeys;
+
     [SerializeField] TextMeshProUGUI[] selectionTexts;
 
     private int currentPlayer;
 
     void Start()
     {
+        usedKeys = new List<KeyCode>();
         currentPlayer = 0;
         gameSetting = new InitGameSettings();
     }
@@ -42,7 +45,8 @@ public class KeySelectHandler : MonoBehaviour
 
         } else {
             foreach(KeyCode key in System.Enum.GetValues(typeof(KeyCode))) {
-                if (Input.GetKeyDown(key)) {
+                if (Input.GetKeyDown(key) && !usedKeys.Contains(key)) {
+                    usedKeys.Add(key);
                     SetKey(key);
                 }
             }
@@ -59,6 +63,7 @@ public class KeySelectHandler : MonoBehaviour
         foreach(TextMeshProUGUI stext in selectionTexts) {
             stext.text = "No Key Selected";
         }
+        usedKeys = new List<KeyCode>();
         currentPlayer = 0;
     }
 }
