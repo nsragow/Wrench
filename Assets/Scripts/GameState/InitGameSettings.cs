@@ -13,11 +13,7 @@ public class InitGameSettings
 
     public InitGameSettings()
     {
-        
         playerControls = new HashSet<KeyCode>();
-
-
-
     }
 }
 
