@@ -51,21 +51,28 @@ public class GameState : MonoBehaviour
         }
     }
 
+    enum State {Splash, Start, KeySelect, Playing, Win, GameOver}
 
-    enum State { Splash, Start,KeySelect, Playing, Win, GameOver }
-    // Start is called before the first frame update
-    void Start()
-    {
-        if (isFirstGameState)
-        {
+    private void Awake() {
+        if (isFirstGameState) {
             state = initialScene;
             isFirstGameState = false;
             SceneManager.LoadScene(StateToName(initialScene));
-            
         }
-        
     }
 
+    void Start()
+    {
+        if (SceneManager.GetActiveScene().name == splashScreenName) {
+            state = State.Start;
+            StartCoroutine(WaitAndLoadScene(1.5f));
+        }
+    }
+
+    IEnumerator WaitAndLoadScene(float waitTime) {
+        yield return new WaitForSeconds(waitTime);
+        SceneManager.LoadScene(StateToName(state));
+    }
 
 
     private string StateToName(State state)
@@ -130,16 +137,9 @@ public class GameState : MonoBehaviour
 
     void Update()
     {
-        
-        if (Input.anyKey)
-        {
-            if(state == State.Splash)
-            {
-                state = State.Start;
-                SceneManager.LoadScene(StateToName(state));
-            }
-            else if(state == State.Start)
-            {
+
+        if (Input.anyKey) {
+            if (state == State.Start) {
                 state = State.KeySelect;
                 SceneManager.LoadScene(StateToName(state));
             }
