@@ -43,9 +43,9 @@ public class AudioManager : Monobehaviour {
     Destroy(source.gameObject);
   }
   
-  public GameAudioClip Play(string clipName, bool isLooping)
+  public AudioClip Play(string clipName, bool isLooping)
   {
-    GameAudioClip clipToPlay = null;
+    AudioClip clipToPlay = null;
     try
     {
       clipToPlay = clipDict[clipName];
