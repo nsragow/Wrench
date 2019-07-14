@@ -17,7 +17,7 @@ public class RowGenerator : MonoBehaviour, Callable
 
     void Start()
     {
-        print("making row gen");
+        
         deadRows = 0;
         gameObject.AddComponent<Pingable>().OnPing(this);
 
@@ -28,7 +28,7 @@ public class RowGenerator : MonoBehaviour, Callable
 
         for(int i = 0; i < startingRows; i++)
         {
-            print("Called print next");
+            
             PrintNext();
         }
         
@@ -36,7 +36,7 @@ public class RowGenerator : MonoBehaviour, Callable
 
     public void Call()
     {
-        print("callllllled");
+        
         deadRows++;
         if(deadRows >= perRow)
         {
@@ -76,7 +76,7 @@ public class RowGenerator : MonoBehaviour, Callable
 
             
             tile.transform.position = new Vector3(x,y,0);
-            print(tile.transform.position);
+            
 
             borderDetector.Track(tile);
 // tile.SetActive(true);

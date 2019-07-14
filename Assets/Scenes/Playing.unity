@@ -149,7 +149,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f49f288b3dbc44a78cdc684047e87db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialScene: 3
+  initialScene: 2
+  wrenchPrefab: {fileID: 7568553676979574084, guid: aa4de7f687e90fa4980bc19c95064956,
+    type: 3}
   splashScreenName: Splash
   startScreenName: Start
   playingScreenName: Playing
