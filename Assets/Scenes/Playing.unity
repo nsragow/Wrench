@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialScene: 2
-  wrenchPrefab: {fileID: 7568553676979574084, guid: aa4de7f687e90fa4980bc19c95064956,
+  wrenchPrefab: {fileID: 6809048833321274716, guid: bf19d7a8aaf17430696a447336a4a996,
     type: 3}
   splashScreenName: Splash
   startScreenName: Start
@@ -283,6 +283,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   borderDetector: {fileID: 1609500429}
+  screwPrefab: {fileID: 6809048833321274716, guid: bf19d7a8aaf17430696a447336a4a996,
+    type: 3}
   startingRows: 4
   perRow: 4
   poolManager: {fileID: 0}

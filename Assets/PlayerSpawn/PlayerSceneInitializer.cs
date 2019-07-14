@@ -8,6 +8,11 @@ public class PlayerSceneInitializer : MonoBehaviour
 
     public float ratioFromFloor = .2f;
 
+    /// <summary>
+    /// Places all players at initial starting locations
+    /// </summary>
+    /// <param name="settings"></param>
+    /// <param name="playerPrefab"></param>
     public void InitPlaying(InitGameSettings settings,GameObject playerPrefab)
     {
         int playerCount = settings.playerControls.Count;
@@ -37,7 +42,14 @@ public class PlayerSceneInitializer : MonoBehaviour
             offsetMult++;
         }
     }
-    
+
+    /// <summary>
+    /// Places player with key to control
+    /// at location
+    /// </summary>
+    /// <param name="pos"></param>
+    /// <param name="controller">keycode for jump</param>
+    /// <param name="prefab"></param>
     public void PlacePlayer(Vector3 pos, KeyCode controller, GameObject prefab)
     {
         //may run into bug where sorting layer doesnt work
@@ -45,15 +57,5 @@ public class PlayerSceneInitializer : MonoBehaviour
         Debug.LogWarning("trying to place player " + controller + " at loc " + pos);
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }
