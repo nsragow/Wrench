@@ -18,10 +18,6 @@ public class AudioManager : Monobehaviour {
     foreach (AudioClip clip in clips)
     {
       clipDict.Add(clip.name, clip);
-      if (clip.isBackgroundMusic)
-      {
-        Play(clip);
-      }
     }
     //set to null so GC will free memory
     clips = null;
