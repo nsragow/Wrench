@@ -17,7 +17,7 @@ public class FellOut : MonoBehaviour
     /// <param name="detector">the detector to ping on out of view</param>
     public void SetBorderDetector(BorderDetection detector)
     {
-        print("called");
+        //print("setting detector");
         if(this.detector != null)
         {
             throw new System.Exception("Tried to set the border detector when it was already set");
@@ -28,7 +28,7 @@ public class FellOut : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        //print("created!");
     }
 
     // Update is called once per frame
