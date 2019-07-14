@@ -9,26 +9,25 @@ public class SpriteScaler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
+    }
+
+    public void Scale(int perScreen)
+    {
+        countPerScreen = perScreen;
+        renderer = GetComponent<SpriteRenderer>();
         double verticalSize = Camera.main.orthographicSize * 2.0;
         double aspect = Camera.main.aspect;
-        print(aspect);
-        print("aspect");
-        print(Screen.width / Screen.height);
-        print("what");
-        double horizontalSize = (aspect)*verticalSize;
-        print(Screen.width);
-        print(Screen.height);
+        
+        double horizontalSize = (aspect) * verticalSize;
+        
         Vector2 spriteSize = renderer.bounds.size;
-        print("hor" +horizontalSize);
-        print("ver" + verticalSize);
+        
 
         float width = spriteSize.x;
-        print(width);
-        print(renderer.size.x);
-        print(transform.localScale.x);
-
-        float newScale =(float) horizontalSize / (width*countPerScreen);
-        print(newScale);
+        
+        float newScale = (float)horizontalSize / (width * countPerScreen);
+        
         float x = newScale;
         float y = newScale;
         float z = transform.localScale.z;
@@ -36,6 +35,5 @@ public class SpriteScaler : MonoBehaviour
 
         transform.localScale = new Vector3(x, y, z);
     }
-
     
 }
