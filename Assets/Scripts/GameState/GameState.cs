@@ -178,5 +178,14 @@ public class GameState : MonoBehaviour
             }
         }
 
+        if (SceneManager.GetActiveScene().name == gameOverName || SceneManager.GetActiveScene().name == winScreenName) {
+            if (Input.GetKeyDown(KeyCode.Space)) {
+                state = State.Playing;
+                SceneManager.LoadScene(StateToName(state));
+            } else if (Input.GetKeyDown(KeyCode.Escape)) {
+                state = State.Start;
+                SceneManager.LoadScene(StateToName(state));
+            }
+        }
     }
 }
