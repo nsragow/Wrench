@@ -149,7 +149,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f49f288b3dbc44a78cdc684047e87db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialScene: 3
+  initialScene: 2
+  wrenchPrefab: {fileID: 6809048833321274716, guid: bf19d7a8aaf17430696a447336a4a996,
+    type: 3}
   splashScreenName: Splash
   startScreenName: Start
   playingScreenName: Playing
@@ -281,6 +283,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   borderDetector: {fileID: 1609500429}
+  screwPrefab: {fileID: 6809048833321274716, guid: bf19d7a8aaf17430696a447336a4a996,
+    type: 3}
   startingRows: 4
   perRow: 4
   poolManager: {fileID: 0}

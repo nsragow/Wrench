@@ -5,6 +5,7 @@ using UnityEngine;
 public class RowGenerator : MonoBehaviour, Callable
 {
     public BorderDetection borderDetector;
+    public GameObject screwPrefab;
 
     public int startingRows;
     public int perRow;
@@ -12,14 +13,20 @@ public class RowGenerator : MonoBehaviour, Callable
 
     private int deadRows;
 
+    private RandPositionSpawner screwSpawner;
+
     
     private Vector3 nextBottomLeft;
 
+    /// <summary>
+    /// Prints the initial rows out
+    /// </summary>
     void Start()
     {
-        print("making row gen");
+        
         deadRows = 0;
         gameObject.AddComponent<Pingable>().OnPing(this);
+        screwSpawner = gameObject.AddComponent<RandPositionSpawner>();
 
         poolManager = GetComponent<TilePoolManager>();
         Vector3 bottomLeft = GetCameraBottomLeft();
@@ -28,15 +35,20 @@ public class RowGenerator : MonoBehaviour, Callable
 
         for(int i = 0; i < startingRows; i++)
         {
-            print("Called print next");
+            
             PrintNext();
         }
         
     }
 
+    /// <summary>
+    /// To be pinged on tile out of screen
+    /// after entire row leaves screen, spawn new
+    /// row
+    /// </summary>
     public void Call()
     {
-        print("callllllled");
+        
         deadRows++;
         if(deadRows >= perRow)
         {
@@ -45,6 +57,10 @@ public class RowGenerator : MonoBehaviour, Callable
         }
     }
 
+    /// <summary>
+    /// prints the next row on
+    /// top of the last row
+    /// </summary>
     private void PrintNext()
     {
         PrintRowAt(nextBottomLeft);
@@ -66,6 +82,7 @@ public class RowGenerator : MonoBehaviour, Callable
             if(tile.GetComponent<SpriteScaler>() == null)
             {
                 tile.AddComponent<SpriteScaler>().Scale(perRow);
+                screwSpawner.PopulateScaledTile(tile, screwPrefab);
             }
             width = tile.GetComponent<SpriteRenderer>().bounds.size.x;
             height = tile.GetComponent<SpriteRenderer>().bounds.size.x;
@@ -76,7 +93,7 @@ public class RowGenerator : MonoBehaviour, Callable
 
             
             tile.transform.position = new Vector3(x,y,0);
-            print(tile.transform.position);
+            
 
             borderDetector.Track(tile);
 // tile.SetActive(true);

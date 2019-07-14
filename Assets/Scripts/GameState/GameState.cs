@@ -11,6 +11,8 @@ public class GameState : MonoBehaviour
     [SerializeField]
     private State initialScene;
 
+    public GameObject wrenchPrefab;
+
     public string splashScreenName;
     public string startScreenName;
     public string playingScreenName;
@@ -54,12 +56,30 @@ public class GameState : MonoBehaviour
 
     enum State {Splash, Start, KeySelect, Playing, Win, GameOver}
 
+
     private void Awake() {
         if (isFirstGameState) {
+
             state = initialScene;
             isFirstGameState = false;
             SceneManager.LoadScene(StateToName(initialScene));
         }
+
+        else
+        {
+            switch(state){
+                case State.Playing:
+                    PlayerSceneInitializer initializer = gameObject.AddComponent<PlayerSceneInitializer>();
+                    initializer.InitPlaying(settings,wrenchPrefab);
+                    break;
+
+            }
+
+        }
+
+
+        
+
     }
 
     void Start()
