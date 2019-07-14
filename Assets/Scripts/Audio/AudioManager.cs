@@ -28,7 +28,7 @@ public class AudioManager : Monobehaviour {
     foreach(AudioSource source in activeAudioPlayers)
     {
         Stop(source);
-      }
+      
     }
   }
   
