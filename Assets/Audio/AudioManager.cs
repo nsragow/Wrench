@@ -6,7 +6,7 @@ using UnityEngine;
 public class GameAudioClip : AudioClip {
   public bool isBackgroundMusic = false;
   [HideInInspector]
-  public float timeAlive = 0
+  public float timeAlive = 0;
 }
 
 public class AudioManager : Monobehaviour {
