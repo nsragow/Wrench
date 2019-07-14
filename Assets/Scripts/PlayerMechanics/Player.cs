@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
 
     Rigidbody2D rb;
     
-    [SerialezeField]
+    [SerializeField]
     private GameObject audioManagerObject;
     private AudioManager audioManager;
 
@@ -94,9 +94,9 @@ public class Player : MonoBehaviour
             rb.AddForce((transform.up) * force);
             
         string fileToPlay = "ClipOut";
-        fileToPlay += (string)Random.Range(1, 8);
+        fileToPlay += Random.Range(1, 8).ToString();
         fileToPlay += ".wav";
-        audioManager.Play(fileToPlay);
+        audioManager.Play(fileToPlay, false);
     }
 
     void Set_Start()
@@ -119,9 +119,9 @@ public class Player : MonoBehaviour
         Set_Pos(target);
         
         string fileToPlay = "ClipIn";
-        fileToPlay += (string)Random.Range(1, 6);
+        fileToPlay += Random.Range(1, 6).ToString();
         fileToPlay += ".wav";
-        audioManager.Play(fileToPlay);
+        audioManager.Play(fileToPlay, false);
     }
 
 }
