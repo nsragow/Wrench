@@ -43,13 +43,13 @@ public class AudioManager : Monobehaviour {
     Destroy(source.gameObject);
   }
   
-  public GameAudioClip Play(string clipName)
+  public GameAudioClip Play(string clipName, bool isLooping)
   {
     GameAudioClip clipToPlay = null;
     try
     {
       clipToPlay = clipDict[clipName];
-      Play(clipToPlay);
+      Play(clipToPlay, isLooping);
     }
     catch (KeyNotFoundException e)
     {
