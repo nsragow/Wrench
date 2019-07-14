@@ -2,18 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class GameAudioClip : AudioClip {
-  public bool isBackgroundMusic = false;
-  [HideInInspector]
-  public float timeAlive = 0;
-}
 
 public class AudioManager : Monobehaviour {
 
   [SerializeField]
-  private GameAudioClip[] clips;
-  private Dictionary<string, GameAudioClip> clipDict = new Dictionary<string, GameAudioClip>();
+  private AudioClip[] clips;
+  private Dictionary<string, AudioClip> clipDict = new Dictionary<string, AudioClip>();
   
   //This should be an object with an audio source as a component (default settings)
   [SerializeField]
@@ -22,7 +16,7 @@ public class AudioManager : Monobehaviour {
   
   void Awake()
   {
-    foreach (GameAudioClip clip in clips)
+    foreach (AudioClip clip in clips)
     {
       clipDict.Add(clip.name, clip);
       if (clip.isBackgroundMusic)
@@ -38,10 +32,6 @@ public class AudioManager : Monobehaviour {
   {
     foreach(AudioSource source in activeAudioPlayers)
     {
-      source.clip.timeAlive += Time.deltaTime;
-      if (!source.clip.isBackgroudMusic && source.clip.length <= source.clip.timeAlive)
-      {
-        activeAudioPlayers.Remove(source);
         Stop(source);
       }
     }
@@ -59,21 +49,22 @@ public class AudioManager : Monobehaviour {
     try
     {
       clipToPlay = clipDict[clipName];
+      Play(clipToPlay);
     }
-    except (KeyNotFoundException)
+    catch (KeyNotFoundException e)
     {
       Debug.LogError("Tried to play audio file that is not in the audio manager!");
     }
-    Play(clipToPlay);
+    
   }
   
   //returns audio source of clip that is playing (you need to keep track of this if you want to premeturely stop the clip!)
-  public AudioSource Play(GameAudioClip clip)
+  public AudioSource Play(AudioClip clip, bool isLooping)
   {
     GameObject newAudioPlayer = Instantiate(audioPlayer);
     source = newAudioPlayer.GetComponent<AudioSource>();
     activeAudioPlayers.Add(source);
-    source.loop = true;
+    source.loop = isLooping;
     source.clip = clip;
     source.Play();
     return source;
