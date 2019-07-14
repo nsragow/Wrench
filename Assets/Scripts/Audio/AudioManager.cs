@@ -2,7 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioManager : Monobehaviour {
+[System.Serializable]
+public class GameAudioClip : MonoBehaviour
+{
+    public bool isBackgroundMusic = false;
+    [HideInInspector]
+    public float timeAlive = 0;
+}
+
+public class AudioManager : MonoBehaviour {
 
   [SerializeField]
   private AudioClip[] clips;
@@ -28,17 +36,16 @@ public class AudioManager : Monobehaviour {
     foreach(AudioSource source in activeAudioPlayers)
     {
         Stop(source);
-      }
     }
   }
   
-  public Stop(AudioSource source)
+  public void Stop(AudioSource source)
   {
     source.Stop();
     Destroy(source.gameObject);
   }
   
-  public AudioClip Play(string clipName, bool isLooping)
+  public void Play(string clipName, bool isLooping)
   {
     AudioClip clipToPlay = null;
     try
@@ -57,12 +64,11 @@ public class AudioManager : Monobehaviour {
   public AudioSource Play(AudioClip clip, bool isLooping)
   {
     GameObject newAudioPlayer = Instantiate(audioPlayer);
-    source = newAudioPlayer.GetComponent<AudioSource>();
+    AudioSource source = newAudioPlayer.GetComponent<AudioSource>();
     activeAudioPlayers.Add(source);
     source.loop = isLooping;
     source.clip = clip;
     source.Play();
     return source;
   }
-
 }

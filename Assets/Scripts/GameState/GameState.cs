@@ -67,7 +67,7 @@ public class GameState : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name == splashScreenName) {
             state = State.Start;
-            StartCoroutine(WaitAndLoadScene(5f));
+            StartCoroutine(WaitAndLoadScene(4.5f));
         }
 
         if (SceneManager.GetActiveScene().name == startScreenName) {
