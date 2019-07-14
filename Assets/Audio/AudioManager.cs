@@ -24,7 +24,7 @@ public class AudioManager : Monobehaviour {
   {
     foreach (GameAudioClip clip in clips)
     {
-      clipDict.add(clip.name, clip);
+      clipDict.Add(clip.name, clip);
       if (clip.isBackgroundMusic)
       {
         Play(clip);
