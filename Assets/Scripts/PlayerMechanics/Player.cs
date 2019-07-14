@@ -27,13 +27,19 @@ public class Player : MonoBehaviour
     public GameObject c_bolt;
 
     Rigidbody2D rb;
+    
+    [SerialezeField]
+    private GameObject audioManagerObject;
+    private AudioManager audioManager;
 
     // Start is called before the first frame update
     void Start()
     {
         ///c_bolt = GameObject.FindGameObjectWithTag("Start");
         rb = GetComponent<Rigidbody2D>();
-
+        
+        audioManager = audioManagerObject.GetComponent<AudioManager>();
+        
         Set_Start();
 
     }
@@ -86,6 +92,11 @@ public class Player : MonoBehaviour
             rb.AddForce((-transform.up) * force);
         else
             rb.AddForce((transform.up) * force);
+            
+        string fileToPlay = "ClipOut";
+        fileToPlay += (string)Random.Range(1, 8);
+        fileToPlay += ".wav";
+        audioManager.Play(fileToPlay);
     }
 
     void Set_Start()
@@ -106,6 +117,11 @@ public class Player : MonoBehaviour
         side = p_side.localPosition;
         p2 = c_side;
         Set_Pos(target);
+        
+        string fileToPlay = "ClipIn";
+        fileToPlay += (string)Random.Range(1, 6);
+        fileToPlay += ".wav";
+        audioManager.Play(fileToPlay);
     }
 
 }
