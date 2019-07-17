@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
         ///c_bolt = GameObject.FindGameObjectWithTag("Start");
         rb = GetComponent<Rigidbody2D>();
         
-        audioManager = audioManagerObject.GetComponent<AudioManager>();
+        ///audioManager = audioManagerObject.GetComponent<AudioManager>();
         
         Set_Start();
 
@@ -97,7 +97,7 @@ public class Player : MonoBehaviour
         string fileToPlay = "ClipOut";
         fileToPlay += Random.Range(1, 8).ToString();
         fileToPlay += ".wav";
-        audioManager.Play(fileToPlay, false);
+        ///audioManager.Play(fileToPlay, false);
 
         r_speed += 200;
         
@@ -125,7 +125,7 @@ public class Player : MonoBehaviour
         string fileToPlay = "ClipIn";
         fileToPlay += Random.Range(1, 6).ToString();
         fileToPlay += ".wav";
-        audioManager.Play(fileToPlay, false);
+        ///audioManager.Play(fileToPlay, false);
 
         r_speed -= 200;
     }

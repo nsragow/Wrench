@@ -81,7 +81,7 @@ public class RowGenerator : MonoBehaviour, Callable
             GameObject tile = poolManager.get();
             if(tile.GetComponent<SpriteScaler>() == null)
             {
-                tile.AddComponent<SpriteScaler>().Scale(perRow);
+                ///tile.AddComponent<SpriteScaler>().Scale(perRow);
                 screwSpawner.PopulateScaledTile(tile, screwPrefab);
             }
             width = tile.GetComponent<SpriteRenderer>().bounds.size.x;
