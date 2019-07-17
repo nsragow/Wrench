@@ -72,6 +72,7 @@ public class Player : MonoBehaviour
         transform.position = tgt.position;
         transform.position += side;
 
+
         var direction = (tgt.transform.position - transform.position).normalized;
         if (p2)
             transform.up = direction;
@@ -97,6 +98,9 @@ public class Player : MonoBehaviour
         fileToPlay += Random.Range(1, 8).ToString();
         fileToPlay += ".wav";
         audioManager.Play(fileToPlay, false);
+
+        r_speed += 200;
+        
     }
 
     void Set_Start()
@@ -122,6 +126,8 @@ public class Player : MonoBehaviour
         fileToPlay += Random.Range(1, 6).ToString();
         fileToPlay += ".wav";
         audioManager.Play(fileToPlay, false);
+
+        r_speed -= 200;
     }
 
 }
